@@ -2,7 +2,7 @@ import sokol
 import sokol.sapp
 import sokol.gfx
 import sokol.sgl
-import second.shapes
+import second as shapes
 import math
 
 struct AppState {
@@ -55,13 +55,18 @@ fn draw() {
 	sgl.defaults()
 	sgl.matrix_mode_projection()
 	sgl.ortho(0.0, f32(sapp.width()), f32(sapp.height()), 0.0, -1.0, 1.0)
-
-	mut cfg := shapes.new_config(0.1, shapes.UnitRectConfig{x: 10, y: 10, w: 15, h: 110})
+	mut cfg := shapes.new_config(0.4, .standard, shapes.UnitRectConfig{ x: 10, y: 10, w: 15, h: 110 })
 	mut gauge := shapes.new_gauge(cfg)
 	gauge.draw()
 	sgl.c4b(25, 150, 0, 128)
-	cfg = shapes.new_config(0.5, shapes.UnitArcConfig{x: 100, y: 50, a: 55, b:35,
-	start_angle: 0.0, end_angle: math.pi / 2})
+	cfg = shapes.new_config(0.5, .standard, shapes.UnitArcConfig{
+		x: 100
+		y: 50
+		a: 55
+		b: 35
+		start_angle: 0.0
+		end_angle: math.pi / 2
+	})
 	gauge = shapes.new_gauge(cfg)
 	gauge.draw()
 	sgl.c4b(25, 150, 0, 128)
