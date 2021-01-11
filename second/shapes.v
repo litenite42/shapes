@@ -124,7 +124,7 @@ pub type ShapeConfig = UnitArcConfig | UnitRectConfig
 pub struct GaugeConfig {
 	percent  f32 = 0.0
 	fill_dir FillDirection = .standard
-	wgc      ShapeConfig
+	shape    ShapeConfig
 }
 
 pub type Shape = Arc | Rect
@@ -144,29 +144,29 @@ mut:
 pub fn new_config(percent f32, fill_dir FillDirection, cfg ShapeConfig) &GaugeConfig {
 	return &GaugeConfig{
 		percent: percent
-		wgc: cfg
+		shape: cfg
 		fill_dir: fill_dir
 	}
 }
 
 pub fn new_gauge(cfg GaugeConfig) &Gauge {
 	mut gauge := &Shape{}
-	match cfg.wgc {
+	match cfg.shape {
 		UnitRectConfig { gauge = new_rect(
-				x: cfg.wgc.x
-				y: cfg.wgc.y
-				w: cfg.wgc.w
-				h: cfg.wgc.h
-				mode: cfg.wgc.mode
+				x: cfg.shape.x
+				y: cfg.shape.y
+				w: cfg.shape.w
+				h: cfg.shape.h
+				mode: cfg.shape.mode
 			) }
 		UnitArcConfig { gauge = new_arc(
-				x: cfg.wgc.x
-				y: cfg.wgc.y
-				start_angle: cfg.wgc.start_angle
-				end_angle: cfg.wgc.end_angle
+				x: cfg.shape.x
+				y: cfg.shape.y
+				start_angle: cfg.shape.start_angle
+				end_angle: cfg.shape.end_angle
 				steps: 10
-				a: cfg.wgc.a
-				b: cfg.wgc.b
+				a: cfg.shape.a
+				b: cfg.shape.b
 				mode: .filled
 				rings: 15
 				init_sgl: false
